@@ -1,0 +1,30 @@
+{
+ "name": "LP Summit Philadelphia 2026",
+ "short_name": "LP Summit",
+ "description": "Great Wave Ventures LP Summit, Philadelphia, October 19 to 22, 2026. Schedule, sites, companies and presenters in Japanese and English.",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "orientation": "portrait",
+ "background_color": "#0F2440",
+ "theme_color": "#0F2440",
+ "lang": "ja",
+ "icons": [
+  {
+   "src": "icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  },
+  {
+   "src": "icon-512-maskable.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ]
+}
