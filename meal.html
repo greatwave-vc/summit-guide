@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dinner selection, Stotesbury Mansion</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0F2440">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Carlito:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<style>
+:root {
+  --navy: #0F2440; --wave: #396B8C; --slate: #334155; --cream: #F6F2DC; --ink: #0A2C54;
+  --page: #FFFFFF; --card: #FFFFFF; --subtle: #EEF3F7; --heading: #0F2440; --body: #334155; --muted: #64748B; --border: #CBD5E1; --border-soft: #E2E8F0;
+  --positive: #2F6B4F; --positive-surface: #E8F1EC; --caution: #8C6A2B; --caution-surface: #F6EFDF; --link: #396B8C; --sel-surface: #EEF3F7;
+  --font-display: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; --font-body: 'Carlito', 'Calibri', 'Helvetica Neue', Arial, sans-serif; --font-ja: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --page: #0F2440; --card: #1A3049; --subtle: #1A3049; --heading: #FFFFFF; --body: rgba(255,255,255,.82); --muted: rgba(255,255,255,.62); --border: rgba(255,255,255,.26); --border-soft: rgba(255,255,255,.14);
+  --positive: #9FD3B8; --positive-surface: #173A33; --caution: #E2C98A; --caution-surface: #3A3221; --link: #B4C9D8; --sel-surface: #24425A; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --page: #0F2440; --card: #1A3049; --subtle: #1A3049; --heading: #FFFFFF; --body: rgba(255,255,255,.82); --muted: rgba(255,255,255,.62); --border: rgba(255,255,255,.26); --border-soft: rgba(255,255,255,.14);
+  --positive: #9FD3B8; --positive-surface: #173A33; --caution: #E2C98A; --caution-surface: #3A3221; --link: #B4C9D8; --sel-surface: #24425A; color-scheme: dark; }
+* { box-sizing: border-box; }
+html { background: var(--navy); }
+body { margin: 0; min-height: 100vh; background: var(--page); color: var(--body); font-family: var(--font-body); font-size: 17px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+:root[lang="ja"] body, :root[lang="ja"] .display, :root[lang="ja"] .eyebrow, :root[lang="ja"] button, :root[lang="ja"] .opt .n, :root[lang="ja"] .q, :root[lang="ja"] .btn, :root[lang="ja"] .tag { font-family: var(--font-ja); }
+:root[lang="ja"] .eyebrow, :root[lang="ja"] .btn, :root[lang="ja"] .tag { letter-spacing: .06em; text-transform: none; }
+.top { background: var(--navy); color: #fff; padding: calc(12px + env(safe-area-inset-top, 0px)) 16px 12px; }
+.top .wrap { display: flex; align-items: center; gap: 12px; }
+.top img { width: 36px; height: 36px; border-radius: 9px; flex: none; }
+.top .brand { font-family: var(--font-display); font-weight: 700; font-size: 14px; letter-spacing: .02em; }
+.top .sub { font-size: 13px; color: rgba(255,255,255,.72); }
+.langs { margin-left: auto; display: flex; border: 1px solid rgba(255,255,255,.3); border-radius: 6px; overflow: hidden; }
+.langs button { background: none; border: 0; color: rgba(255,255,255,.8); font: inherit; font-size: 13px; font-weight: 600; padding: 6px 10px; cursor: pointer; white-space: nowrap; }
+.langs button.on { background: #fff; color: var(--navy); }
+.wrap { max-width: 560px; margin: 0 auto; padding-inline: 16px; }
+main { padding: 22px 0 40px; }
+.eyebrow { font-family: var(--font-display); font-size: 12px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--wave); margin: 0 0 6px; }
+.display { font-family: var(--font-display); font-weight: 700; letter-spacing: -.01em; color: var(--heading); line-height: 1.24; font-size: 24px; margin: 0 0 8px; }
+.meta { margin: 0 0 18px; color: var(--body); }
+.meta b { color: var(--heading); }
+.card { border: 1px solid var(--border-soft); border-radius: 14px; background: var(--subtle); padding: 18px 16px; }
+.q { font-family: var(--font-display); font-weight: 600; font-size: 14px; color: var(--heading); margin: 18px 0 10px; line-height: 1.4; }
+.q:first-child { margin-top: 0; }
+.fields { display: grid; gap: 10px; }
+.fields label, .lbl { font-size: 13px; color: var(--muted); display: block; margin-bottom: 3px; }
+input { font: inherit; font-size: 16px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 9px; background: var(--card); color: var(--heading); width: 100%; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.opts { display: grid; gap: 8px; }
+.opt { display: flex; align-items: flex-start; gap: 12px; width: 100%; text-align: left; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border); background: var(--card); color: var(--heading); cursor: pointer; font: inherit; line-height: 1.4; }
+.opt .dot { flex: none; width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border); margin-top: 2px; position: relative; }
+.opt.sel { border-color: var(--wave); background: var(--sel-surface); box-shadow: inset 0 0 0 1px var(--wave); }
+.opt.sel .dot { border-color: var(--wave); }
+.opt.sel .dot::after { content: ''; position: absolute; inset: 3px; border-radius: 50%; background: var(--wave); }
+.opt .n { font-family: var(--font-display); font-weight: 600; font-size: 15px; display: block; }
+.opt .d { font-size: 14px; color: var(--muted); display: block; }
+.tag { display: inline-block; font-family: var(--font-display); font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--wave); border: 1px solid var(--wave); border-radius: 999px; padding: 1px 7px; margin-left: 6px; vertical-align: 2px; }
+.tag.warn { color: var(--caution); border-color: var(--caution); }
+.btn { font-family: var(--font-display); font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; border-radius: 6px; padding: 13px 16px; border: 1px solid var(--border); background: var(--card); color: var(--heading); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; width: 100%; margin-top: 16px; }
+.btn.primary { background: var(--wave); border-color: var(--wave); color: #fff; }
+.err { color: var(--caution); background: var(--caution-surface); border-radius: 8px; padding: 8px 10px; font-size: 14px; margin: 12px 0 0; }
+.done { font-size: 18px; font-weight: 700; color: var(--positive); margin: 0 0 6px; }
+.done.no { color: var(--heading); }
+.small { font-size: 14px; color: var(--muted); margin: 10px 0 0; }
+.small b { color: var(--heading); }
+.linkbtn { background: none; border: 0; padding: 0; color: var(--link); cursor: pointer; font: inherit; font-size: 14px; border-bottom: 1px solid rgba(57,107,140,.32); }
+.summary { display: grid; gap: 6px; margin-top: 10px; font-size: 15px; }
+.summary span { color: var(--muted); font-size: 13px; display: block; }
+details.menu { margin-top: 18px; border: 1px solid var(--border-soft); border-radius: 12px; padding: 0 14px; }
+details.menu summary { font-family: var(--font-display); font-weight: 600; font-size: 13px; color: var(--heading); padding: 12px 0; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+details.menu summary::-webkit-details-marker { display: none; }
+details.menu summary::after { content: '+'; color: var(--muted); font-size: 18px; }
+details.menu[open] summary::after { content: '\2013'; }
+:root[lang="ja"] details.menu summary { font-family: var(--font-ja); }
+details.menu dl { margin: 0 0 12px; display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; font-size: 14px; }
+details.menu dt { font-family: var(--font-display); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--wave); padding-top: 3px; white-space: nowrap; }
+:root[lang="ja"] details.menu dt { font-family: var(--font-ja); letter-spacing: .04em; text-transform: none; }
+details.menu dd { margin: 0; color: var(--body); }
+.guide { margin-top: 18px; }
+.guide .btn { margin-top: 0; }
+.foot { margin-top: 26px; font-size: 13px; color: var(--muted); }
+.foot a { color: var(--link); }
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <img src="apple-touch-icon.png" alt="">
+  <div><div class="brand" data-i="brand"></div><div class="sub" data-i="sub"></div></div>
+  <div class="langs"><button type="button" data-lang="en">EN</button><button type="button" data-lang="ja">日本語</button></div>
+</div></header>
+<main><div class="wrap">
+  <p class="eyebrow" data-i="eyebrow"></p>
+  <h1 class="display" data-i="title"></h1>
+  <p class="meta" data-i="meta"></p>
+  <div class="card" id="card"></div>
+  <details class="menu"><summary data-i="menuTitle"></summary><dl id="menu"></dl></details>
+  <div class="guide"><a class="btn" href="./" data-i="openGuide"></a></div>
+  <p class="foot" data-i="foot"></p>
+</div></main>
+<script>
+const UI = {
+  en: { brand: 'GWV LP Summit', sub: 'Philadelphia, October 19 to 22, 2026', eyebrow: 'Wednesday, October 21 · 6:15 PM', title: 'Closing dinner at Stotesbury Mansion',
+    meta: '<b>Please choose your entrée and dessert.</b> The caterer needs every guest\'s choice by <b>Friday, October 16, 6:00 PM Japan time</b>. It takes about 30 seconds.',
+    name: 'Name', company: 'Company', entree: 'Entrée, choose one', dessert: 'Dessert, choose one', dietary: 'Allergies or dietary needs (optional)', dietaryPh: 'e.g. no shellfish', entreeL: 'Entrée', dessertL: 'Dessert', dietaryL: 'Allergies or dietary needs',
+    send: 'Send my selection', needName: 'Please enter your name.', needEntree: 'Please choose an entrée.', needDessert: 'Please choose a dessert.',
+    thanks: 'Thank you, your selection is in.', you: 'Your selection', change: 'Change my selection', notAttending: 'I will not be at the dinner', notAttendingDone: 'Noted, thank you. We will miss you at dinner.',
+    tGf: 'Gluten-free', tVeg: 'Vegetarian', tNf: 'Nut-free', tNuts: 'Contains nuts',
+    menuTitle: 'The rest of the menu, served to everyone', openGuide: 'Open the Summit guide',
+    foot: 'Questions? Message Michael Palmer on WhatsApp at +1 410 236 0679 or <a href="mailto:michael@greatwave.vc">michael@greatwave.vc</a>.' },
+  ja: { brand: 'GWV LPサミット', sub: 'フィラデルフィア、2026年10月19日〜22日', eyebrow: '10月21日（水）18:15', title: 'クロージングディナー（Stotesbury Mansion）',
+    meta: '<b>メインとデザートをお選びください。</b>ケータリング会社への回答期限は<b>10月16日（金）18:00（日本時間）</b>です。30秒ほどで完了します。',
+    name: 'お名前', company: '会社名', entree: 'メイン（1つお選びください）', dessert: 'デザート（1つお選びください）', dietary: 'アレルギー・食事制限（任意）', dietaryPh: '例：甲殻類が食べられません', entreeL: 'メイン', dessertL: 'デザート', dietaryL: 'アレルギー・食事制限',
+    send: '送信する', needName: 'お名前をご入力ください。', needEntree: 'メインをお選びください。', needDessert: 'デザートをお選びください。',
+    thanks: 'ありがとうございます。ご選択を承りました。', you: 'ご選択内容', change: '選択を変更する', notAttending: 'ディナーには参加しません', notAttendingDone: '承知しました。ありがとうございます。',
+    tGf: 'グルテンフリー', tVeg: 'ベジタリアン', tNf: 'ナッツ不使用', tNuts: 'ナッツを含む',
+    menuTitle: 'その他のコース内容（全員共通）', openGuide: 'サミットガイドを開く',
+    foot: 'ご不明な点は Michael Palmer まで。WhatsApp +1 410 236 0679 または <a href="mailto:michael@greatwave.vc">michael@greatwave.vc</a>' }
+};
+// Dish ids are the English names the caterer uses; they are what gets posted, whichever language the guest reads.
+const ENTREES = [
+  { id: 'Crab Cake', en: ['Crab Cake', 'lemon tarragon remoulade'], ja: ['クラブケーキ', 'レモンとタラゴンのレムラードソース'], tag: '' },
+  { id: 'Chargrilled Flank', en: ['Chargrilled Flank Steak', 'chimichurri rojo'], ja: ['炭火焼きフランクステーキ', '赤チミチュリソース'], tag: 'tGf' },
+  { id: 'Stuffed Pumpkin Ravioli', en: ['Stuffed Pumpkin Ravioli', 'sage brown butter, seasonal greens and vegetables'], ja: ['かぼちゃのラビオリ', 'セージの焦がしバター、季節の青菜と野菜'], tag: 'tVeg' }
+];
+const DESSERTS = [
+  { id: 'Strawberry Shortcake', en: ['Strawberry Shortcake', 'macerated strawberries, rhubarb syrup, whipped cream, strawberry coulis, sugared scone'], ja: ['ストロベリーショートケーキ', 'マリネしたいちご、ルバーブシロップ、ホイップクリーム、いちごのクーリ、シュガースコーン'], tag: 'tNf' },
+  { id: 'Chocolate Hazelnut Bar', en: ['Chocolate Hazelnut Bar', 'milk chocolate mousse, hazelnut crunch, hazelnut nougatine, cocoa gelée'], ja: ['チョコレート・ヘーゼルナッツバー', 'ミルクチョコレートムース、ヘーゼルナッツクランチ、ヌガティーヌ、カカオのジュレ'], tag: 'tNuts' }
+];
+const MENU = {
+  en: [['Toast', 'Roederer Estate Brut'], ['Amuse-bouche', 'Spicy tuna poke bowl: brown rice, sriracha aioli, avocado, cucumber, chili crisps'], ['First course', 'Harvest salad: roasted acorn squash, kale, mixed greens, pomegranate. Housemade focaccia with Italian herbs'], ['Palate cleanser', 'Champagne sorbet'], ['Sides', 'Seasonal vegetables from local farms. Scalloped potato au gratin']],
+  ja: [['乾杯', 'ロデレール・エステート・ブリュット（スパークリングワイン）'], ['アミューズ', 'スパイシーツナのポケボウル：玄米、シラチャアイオリ、アボカド、きゅうり、チリクリスプ'], ['前菜', 'ハーベストサラダ：ローストしたどんぐりかぼちゃ、ケール、ミックスグリーン、ざくろ。自家製フォカッチャ（イタリアンハーブ）'], ['お口直し', 'シャンパンのソルベ'], ['付け合わせ', '地元農場の季節の野菜、スカロップドポテトのグラタン']]
+};
+const FORM = 'https://docs.google.com/forms/d/e/1FAIpQLSepAzdyzbeaCmdwnz_2OFhvQnONC9xIQiN2rtO-wJ_o4R-4wg/formResponse';
+const F = { name: 'entry.709637427', company: 'entry.17339220', entree: 'entry.929150428', dessert: 'entry.1242739510', dietary: 'entry.829075191', rid: 'entry.1936874810' };
+const store = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} } };
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const params = new URLSearchParams(location.search);
+let lang = 'en';
+const savedLang = store.get('lang'); const pl = params.get('lang');
+if (pl === 'ja' || pl === 'en') lang = pl; else if (savedLang === 'ja' || savedLang === 'en') lang = savedLang; else if (/^ja/i.test(navigator.language || '')) lang = 'ja';
+const ui = k => UI[lang][k] || UI.en[k] || k;
+let mem = {};
+function state() { try { return JSON.parse(store.get('meal') || 'null') || mem; } catch (e) { return mem; } }
+function save(s) { mem = s; store.set('meal', JSON.stringify(s)); }
+function rid() { const s = state(); if (s.rid) return s.rid; s.rid = Math.random().toString(36).slice(2, 10); save(s); return s.rid; }
+function send(fields) { const body = new URLSearchParams(); Object.keys(fields).forEach(k => { if (fields[k] != null && fields[k] !== '' && F[k]) body.append(F[k], String(fields[k])); }); try { return fetch(FORM, { method: 'POST', mode: 'no-cors', body, keepalive: true }).catch(() => {}); } catch (e) { return Promise.resolve(); } }
+// Prefill name and company from the welcome-drinks RSVP if the guest gave them there.
+function known() { try { const r = JSON.parse(store.get('rsvp') || 'null'); return (r && r.details) || {}; } catch (e) { return {}; } }
+let draft = { entree: '', dessert: '' }, err = '';
+const dish = (list, id) => list.find(x => x.id === id);
+const dishName = (list, id) => { const d = dish(list, id); return d ? d[lang][0] : id; };
+function optHtml(group, list, sel) {
+  return `<div class="opts">${list.map(o => `<button type="button" class="opt${sel === o.id ? ' sel' : ''}" data-pick="${group}" data-id="${esc(o.id)}"><span class="dot"></span><span><span class="n">${esc(o[lang][0])}${o.tag ? `<span class="tag${o.tag === 'tNuts' ? ' warn' : ''}">${ui(o.tag)}</span>` : ''}</span><span class="d">${esc(o[lang][1])}</span></span></button>`).join('')}</div>`;
+}
+function card() {
+  const s = state();
+  if (s.entree === 'Not attending') {
+    return `<p class="done no">${ui('notAttendingDone')}</p><p class="small">${s.name ? `<b>${esc(s.name)}</b>${s.company ? `, ${esc(s.company)}` : ''}. ` : ''}<button type="button" class="linkbtn" data-change>${ui('change')}</button></p>`;
+  }
+  if (s.entree && s.dessert) {
+    return `<p class="done">${ui('thanks')}</p><div class="summary"><div><span>${ui('name')}</span><b>${esc(s.name)}</b>${s.company ? `, ${esc(s.company)}` : ''}</div><div><span>${ui('entreeL')}</span>${esc(dishName(ENTREES, s.entree))}</div><div><span>${ui('dessertL')}</span>${esc(dishName(DESSERTS, s.dessert))}</div>${s.dietary ? `<div><span>${ui('dietaryL')}</span>${esc(s.dietary)}</div>` : ''}</div><p class="small"><button type="button" class="linkbtn" data-change>${ui('change')}</button></p>`;
+  }
+  const k = known();
+  const name = draft.name != null ? draft.name : (s.name || k.name || ''); const company = draft.company != null ? draft.company : (s.company || k.company || ''); const dietary = draft.dietary != null ? draft.dietary : (s.dietary || '');
+  return `<div class="fields"><div class="row2"><div><label>${ui('name')}</label><input type="text" data-f="name" autocomplete="name" value="${esc(name)}"></div><div><label>${ui('company')}</label><input type="text" data-f="company" autocomplete="organization" value="${esc(company)}"></div></div></div>
+  <p class="q">${ui('entree')}</p>${optHtml('entree', ENTREES, draft.entree)}
+  <p class="q">${ui('dessert')}</p>${optHtml('dessert', DESSERTS, draft.dessert)}
+  <p class="q">${ui('dietary')}</p><input type="text" data-f="dietary" placeholder="${esc(ui('dietaryPh'))}" value="${esc(dietary)}">
+  ${err ? `<p class="err">${err}</p>` : ''}
+  <button type="button" class="btn primary" data-send>${ui('send')}</button>
+  <p class="small"><button type="button" class="linkbtn" data-absent>${ui('notAttending')}</button></p>`;
+}
+function readFields() { const root = document.getElementById('card'); ['name', 'company', 'dietary'].forEach(n => { const el = root.querySelector(`[data-f="${n}"]`); if (el) draft[n] = el.value.trim(); }); }
+function submit() {
+  readFields();
+  if (!draft.name) { err = ui('needName'); return render(); }
+  if (!draft.entree) { err = ui('needEntree'); return render(); }
+  if (!draft.dessert) { err = ui('needDessert'); return render(); }
+  err = '';
+  const s = state(); s.rid = rid(); Object.assign(s, { name: draft.name, company: draft.company || '', entree: draft.entree, dessert: draft.dessert, dietary: draft.dietary || '', ts: Date.now() }); save(s);
+  send({ name: s.name, company: s.company, entree: s.entree, dessert: s.dessert, dietary: s.dietary, rid: s.rid });
+  render(); window.scrollTo({ top: 0 });
+}
+function absent() {
+  readFields();
+  if (!draft.name) { err = ui('needName'); return render(); }
+  err = '';
+  const s = state(); s.rid = rid(); Object.assign(s, { name: draft.name, company: draft.company || '', entree: 'Not attending', dessert: '', dietary: draft.dietary || '', ts: Date.now() }); save(s);
+  send({ name: s.name, company: s.company, entree: 'Not attending', dietary: s.dietary, rid: s.rid });
+  render(); window.scrollTo({ top: 0 });
+}
+function render() {
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i]').forEach(el => { el.innerHTML = ui(el.dataset.i); });
+  document.querySelectorAll('[data-lang]').forEach(b => b.classList.toggle('on', b.dataset.lang === lang));
+  document.getElementById('menu').innerHTML = MENU[lang].map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('');
+  document.getElementById('card').innerHTML = card();
+}
+document.addEventListener('click', ev => {
+  const l = ev.target.closest('[data-lang]'); if (l) { readFields(); lang = l.dataset.lang; store.set('lang', lang); render(); return; }
+  const p = ev.target.closest('[data-pick]'); if (p) { readFields(); draft[p.dataset.pick] = p.dataset.id; err = ''; render(); return; }
+  if (ev.target.closest('[data-send]')) { submit(); return; }
+  if (ev.target.closest('[data-absent]')) { absent(); return; }
+  if (ev.target.closest('[data-change]')) { const s = state(); draft = { entree: s.entree === 'Not attending' ? '' : s.entree, dessert: s.dessert, name: s.name, company: s.company, dietary: s.dietary }; save({ rid: s.rid, name: s.name, company: s.company, dietary: s.dietary }); render(); return; }
+});
+render();
+</script>
+</body>
+</html>
